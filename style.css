@@ -25,6 +25,7 @@
 
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
+html, body{overflow-x:hidden; width:100%;}
 body{
   margin:0;
   font-family:var(--body);
@@ -41,10 +42,11 @@ p{margin:0 0 1em;}
 
 /* ---------- pill badge / eyebrow ---------- */
 .pill{
-  display:inline-flex; align-items:center; gap:8px;
+  display:inline-flex; align-items:center; gap:8px; flex-wrap:wrap;
   background:#F5E3D8; border:1px solid var(--line);
   border-radius:20px; padding:7px 16px 7px 12px;
   font-size:13.5px; font-weight:600; color:var(--rust);
+  max-width:100%;
 }
 .pill .dot{width:7px; height:7px; border-radius:50%; background:var(--blue);}
 .eyebrow{
@@ -69,18 +71,34 @@ nav.primary a:hover, nav.primary a:focus-visible{color:var(--ink);}
 nav.primary a.current{color:var(--ink);}
 .header-actions{display:flex; align-items:center; gap:10px;}
 .nav-toggle{display:none;}
+.mobile-actions{display:none;}
 
 @media (max-width:900px){
+  .site-header .wrap{padding:0 20px;}
   nav.primary{
-    position:fixed; inset:78px 0 0 0; background:var(--cream);
-    flex-direction:column; align-items:flex-start; gap:0; padding:8px 32px 24px;
+    position:fixed; inset:72px 0 0 0; background:var(--cream);
+    flex-direction:column; align-items:stretch; gap:0; padding:8px 20px 24px;
     transform:translateY(-8px); opacity:0; pointer-events:none;
     transition:opacity .18s ease, transform .18s ease; overflow-y:auto;
+    z-index:60;
   }
   nav.primary.open{opacity:1; transform:translateY(0); pointer-events:auto;}
-  nav.primary a{padding:14px 0; border-bottom:1px solid var(--line); width:100%;}
-  .nav-toggle{display:block; background:none; border:0; color:var(--ink); font-size:24px; cursor:pointer; padding:4px;}
-  .header-actions .btn-ghost{display:none;}
+  nav.primary > a{padding:16px 2px; border-bottom:1px solid var(--line); width:100%; font-size:16.5px; display:block;}
+  nav.primary .mobile-actions{display:flex; flex-direction:column; gap:12px; margin-top:20px;}
+  nav.primary .mobile-actions a.btn{width:100%; justify-content:center; border-bottom:none; padding:14px 22px;}
+  .nav-toggle{display:block; background:none; border:0; color:var(--ink); font-size:22px; cursor:pointer; padding:6px; line-height:1; flex-shrink:0;}
+  .header-actions{display:none;}
+  .logo{font-size:17px;}
+}
+@media (max-width:420px){
+  .wrap{padding:0 18px;}
+  .hero h1{font-size:30px;}
+  .hero p.lede{font-size:16px;}
+  section{padding:56px 0;}
+  section.tight{padding:40px 0;}
+  .steps-grid, .pricing-grid, .offer-grid, .services-grid, .team-grid{gap:16px;}
+  .stat-card{max-width:150px; padding:12px 14px;}
+  .stat-card .num{font-size:20px;}
 }
 
 /* ---------- buttons ---------- */
