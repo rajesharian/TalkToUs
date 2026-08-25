@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Book a Session — Talk2Us</title>
+<meta name="description" content="Book a confidential counselling session with Talk2Us, Haldwani. Slots available 10:00 AM – 6:00 PM.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="mark"></span>Talk2Us</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="primary">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="vlogs.html">Vlogs/Activities</a>
+      <a href="donate.html">Support Us</a>
+      <a href="contact.html">Contact Us</a>
+    </nav>
+    <div class="header-actions">
+      <a href="donate.html" class="btn btn-outline btn-sm">Donate</a>
+      <a href="booking.html" class="btn btn-primary btn-sm">Book a Session</a>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Book a Session</span>
+    <h1>Choose a time. We'll take it from there.</h1>
+    <p>Slots are available between <strong>10:00 AM and 6:00 PM</strong>. Fill in a few details and pick a time that works for you — we'll confirm by phone or email.</p>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <form class="booking-panel" id="booking-form" action="#" method="POST">
+      <div>
+        <h2 style="font-size:22px;">Pick a slot</h2>
+        <p>Available 10:00 AM – 6:00 PM, Monday to Saturday.</p>
+        <div class="slot-grid">
+          <button type="button" class="slot">10:00 AM</button>
+          <button type="button" class="slot">11:00 AM</button>
+          <button type="button" class="slot">12:00 PM</button>
+          <button type="button" class="slot">1:00 PM</button>
+          <button type="button" class="slot">2:00 PM</button>
+          <button type="button" class="slot">3:00 PM</button>
+          <button type="button" class="slot">4:00 PM</button>
+          <button type="button" class="slot">5:00 PM</button>
+          <button type="button" class="slot">6:00 PM</button>
+        </div>
+        <input type="hidden" name="preferred_time" id="chosen-slot" value="">
+      </div>
+      <div>
+        <h2 style="font-size:22px; color:#fff;">Your details</h2>
+        <div style="display:flex; flex-direction:column; gap:14px; margin-top:6px;">
+          <div>
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+91" required>
+          </div>
+          <div>
+            <label for="service">Service</label>
+            <select id="service" name="service">
+              <option>Career Guidance &amp; Counselling</option>
+              <option>Psychological Counselling</option>
+              <option>Adolescent &amp; Child Counselling</option>
+              <option>Family &amp; Relationship Counselling</option>
+              <option>Workshops &amp; Group Programs</option>
+              <option>Corporate Training &amp; Wellness</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="notes">Anything you'd like us to know (optional)</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Optional"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="justify-content:center; margin-top:4px;">Request this slot</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="note-box">
+      <strong>Setting this up:</strong> this form needs a free form-backend (like Formspree or Web3Forms) or a booking tool (like Calendly) connected before it can actually send you requests.
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand-block">
+        <a href="index.html" class="logo"><span class="mark"></span>Talk2Us</a>
+        <p>We listen. We care. Compassionate counselling in Haldwani, Uttarakhand.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Site</h4>
+          <a href="about.html">About Us</a>
+          <a href="services.html">Services</a>
+          <a href="booking.html">Book a Session</a>
+          <a href="vlogs.html">Vlogs</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="donate.html">Support Us</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 Talk2Us — All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

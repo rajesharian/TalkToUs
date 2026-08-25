@@ -1,177 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us | Talk2Us</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: #ffffff;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-
-    .page-title {
-      font-family: 'Bebas Neue', sans-serif;
-      text-align: center;
-      font-size: 2.9rem;
-      margin: 2.5rem 0;
-      font-weight: bold;
-      position: relative;
-      color: #000000;
-    }
-
-    .page-title::after {
-      content: "";
-      display: block;
-      width: 100px;
-      height: 3px;
-      background: #ff6600;
-      margin: 0.5rem auto 0;
-      border-radius: 2px;
-    }
-
-    /* Layout */
-    .contact-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: center;
-      padding: 2rem 5%;
-    }
-
-    .contact-info h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      color: #000000;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .contact-info p {
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    .contact-info a {
-      color: #000000;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .contact-info a:hover {
-      text-decoration: underline;
-    }
-
-    .map-container iframe {
-      width: 100%;
-      height: 450px;
-      border: 0;
-      border-radius: 10px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .contact-container {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-info {
-        order: 1;
-        text-align: center;
-      }
-
-      .map-container {
-        order: 2;
-      }
-
-      .map-container iframe {
-        height: 350px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact Us — Talk2Us</title>
+<meta name="description" content="Get in touch with Talk2Us in Haldwani, Uttarakhand — phone, email, address and working hours.">
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <!-- Navbar -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">TALK2US</a>
 
-      <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNav">
-        <span class="hamburger"></span>
-      </button>
-
-      <nav class="main-nav" id="mainNav" role="navigation" aria-hidden="true">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="booking.html">Book a Session</a></li>
-          <li><a href="vlogs.html">Vlogs/Activities</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="donate.html">Support Us</a></li>
-          <li><a href="contact.html" class="active">Contact Us</a></li>
-        </ul>
-      </nav>
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="mark"></span>Talk2Us</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="primary">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="vlogs.html">Vlogs/Activities</a>
+      <a href="donate.html">Support Us</a>
+      <a href="contact.html" class="current">Contact Us</a>
+    </nav>
+    <div class="header-actions">
+      <a href="donate.html" class="btn btn-outline btn-sm">Donate</a>
+      <a href="booking.html" class="btn btn-primary btn-sm">Book a Session</a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- Page Content -->
-  <main class="container">
-    <h1 class="page-title">Contact Us</h1>
+<section class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Get in Touch</span>
+    <h1>We'd love to hear from you.</h1>
+  </div>
+</section>
 
-    <div class="contact-container">
-      <!-- Left: Info -->
-      <div class="contact-info">
-        <h2>Get in Touch</h2>
-        <p><strong>Address:</strong><br>
-        HN 131 Naruttam Ganga Vihar phase 3 harinagar kusumkhera haldwani Nainital Uttarakhand – 263139</p>
-
-        <p><strong>Phone:</strong><br>
-        <a href="tel:+916395763571">+91 6395763571</a></p>
-
-        <p><strong>Email:</strong><br>
-        <a href="mailto:talk2ushaldwani@gmail.com">talk2ushaldwani@gmail.com</a></p>
-
-        <p><strong>Working Hours:</strong><br>
-        Monday – Saturday: After 6:00 PM<br>
-        Sunday: 10AM to 5PM</p>
+<section class="tight">
+  <div class="wrap">
+    <div class="contact-grid">
+      <ul class="contact-list">
+        <li>
+          <span class="label">Address</span>
+          HN 131 Naruttam Ganga Vihar, Phase 3, Harinagar Kusumkhera, Haldwani, Nainital, Uttarakhand – 263139
+        </li>
+        <li>
+          <span class="label">Phone</span>
+          <a href="tel:+916395763571">+91 6395763571</a>
+        </li>
+        <li>
+          <span class="label">Email</span>
+          <a href="mailto:talk2ushaldwani@gmail.com">talk2ushaldwani@gmail.com</a>
+        </li>
+        <li>
+          <span class="label">Working hours</span>
+          Monday – Saturday: after 6:00 PM<br>
+          Sunday: 10:00 AM – 5:00 PM
+        </li>
+      </ul>
+      <div class="map-frame">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3482.0956451819397!2d79.49423127556412!3d29.220741075348606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a09b13b6a5ad0d%3A0x31f741aabab2bb1!2sH.N%20ENTERPRISES!5e0!3m2!1sen!2sin!4v1760361531599!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Talk2Us location"></iframe>
       </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Right: Map -->
-      <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3482.0956451819397!2d79.49423127556412!3d29.220741075348606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a09b13b6a5ad0d%3A0x31f741aabab2bb1!2sH.N%20ENTERPRISES!5e0!3m2!1sen!2sin!4v1760361531599!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand-block">
+        <a href="index.html" class="logo"><span class="mark"></span>Talk2Us</a>
+        <p>We listen. We care. Compassionate counselling in Haldwani, Uttarakhand.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Site</h4>
+          <a href="about.html">About Us</a>
+          <a href="services.html">Services</a>
+          <a href="booking.html">Book a Session</a>
+          <a href="vlogs.html">Vlogs</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="donate.html">Support Us</a>
+          <a href="contact.html">Contact</a>
+        </div>
       </div>
     </div>
-  </main>
+    <div class="footer-bottom">© 2025 Talk2Us — All rights reserved.</div>
+  </div>
+</footer>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 Talk2Us — All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="js/script.js"></script>
-
-  <!-- Hamburger Script -->
-  <script>
-    const navToggle = document.getElementById("navToggle");
-    const mainNav = document.getElementById("mainNav");
-
-    if (navToggle && mainNav) {
-      navToggle.addEventListener("click", () => {
-        const expanded = navToggle.getAttribute("aria-expanded") === "true";
-        navToggle.setAttribute("aria-expanded", !expanded);
-        mainNav.classList.toggle("active");
-        mainNav.setAttribute("aria-hidden", expanded);
-      });
-    }
-  </script>
+<script src="script.js"></script>
 </body>
 </html>
