@@ -47,18 +47,19 @@
         <span class="eyebrow">Join Our Team</span>
         <h2 style="font-size:22px;">Volunteer with us</h2>
         <p>If you're passionate about mental health and want to contribute to our cause, share your details below. We'll reach out to you soon.</p>
-        <form class="contact-panel" style="max-width:420px; box-shadow:none; border:1px solid var(--line); padding:26px;">
+        <form class="contact-panel gs-form" style="max-width:420px; box-shadow:none; border:1px solid var(--line); padding:26px;">
+          <input type="hidden" name="form_type" value="volunteer">
           <div class="field">
             <label for="vname">Full name</label>
-            <input type="text" id="vname" name="vname" placeholder="Your name" required>
+            <input type="text" id="vname" name="name" placeholder="Your name" required>
           </div>
           <div class="field">
             <label for="vemail">Email</label>
-            <input type="email" id="vemail" name="vemail" placeholder="you@example.com" required>
+            <input type="email" id="vemail" name="email" placeholder="you@example.com" required>
           </div>
           <div class="field">
             <label for="vmessage">How would you like to help?</label>
-            <textarea id="vmessage" name="vmessage" rows="4" placeholder="Tell us a bit about yourself"></textarea>
+            <textarea id="vmessage" name="message" rows="4" placeholder="Tell us a bit about yourself"></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Send</button>
         </form>

@@ -43,7 +43,8 @@
 
 <section class="tight">
   <div class="wrap">
-    <form class="booking-panel" id="booking-form" action="#" method="POST">
+    <form class="booking-panel gs-form" id="booking-form">
+      <input type="hidden" name="form_type" value="booking">
       <div>
         <h2 style="font-size:22px;">Pick a slot</h2>
         <p>Available 10:00 AM – 6:00 PM, Monday to Saturday.</p>
@@ -91,10 +92,6 @@
         </div>
       </div>
     </form>
-
-    <div class="note-box">
-      <strong>Setting this up:</strong> this form needs a free form-backend (like Formspree or Web3Forms) or a booking tool (like Calendly) connected before it can actually send you requests.
-    </div>
   </div>
 </section>
 
