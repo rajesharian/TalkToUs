@@ -64,6 +64,7 @@ p{margin:0 0 1em;}
 }
 .site-header .wrap{display:flex; align-items:center; justify-content:space-between; height:78px; gap:20px;}
 .logo{display:flex; align-items:center; gap:9px; text-decoration:none; font-family:var(--display); font-weight:800; font-size:19px; color:var(--ink);}
+.logo .logo-icon{width:32px; height:32px; display:block; flex-shrink:0;}
 .logo .mark{width:26px; height:26px; border-radius:9px 4px 9px 4px; background:var(--green); display:inline-block;}
 nav.primary{display:flex; gap:20px; align-items:center;}
 nav.primary a{color:var(--muted-2); text-decoration:none; font-size:14px; font-weight:600; transition:color .15s ease; white-space:nowrap;}
