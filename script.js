@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(() => {
           if (btn) { btn.disabled = false; btn.textContent = originalText; }
-          alert('Something went wrong sending this. Please try again, or reach us directly at talk2ushaldwani@gmail.com or +91 6395763571.');
+          alert('Something went wrong sending this. Please try again, or reach us directly at talk2ushaldwani@gmail.com or +91 8439139092.');
         });
     });
   });
