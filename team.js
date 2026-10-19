@@ -1,7 +1,7 @@
 /* Talk2Us team member publisher — adds published members without altering existing cards. */
 (() => {
   'use strict';
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxiXCpahNCMiQtjJL05poegcBwoa0SUWyc9AqW_ZOhsJuLtO6kufzSBMy0SkATgLrTU/exec';
+  const API_URL = 'team.json';
   const grid = document.getElementById('talk2us-team-grid');
   if (!grid) return;
 

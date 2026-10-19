@@ -1,6 +1,6 @@
 "use strict";
 (() => {
-  const API = "https://script.google.com/macros/s/AKfycbxiXCpahNCMiQtjJL05poegcBwoa0SUWyc9AqW_ZOhsJuLtO6kufzSBMy0SkATgLrTU/exec";
+  const API = "team.json";
   const nameEl = document.getElementById("member-name");
   const roleEl = document.getElementById("member-role");
   const bodyEl = document.getElementById("member-biography");
