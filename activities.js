@@ -1,7 +1,7 @@
 /* Talk2Us public activity feed: read-only. Existing timeline is never changed. */
 (() => {
   "use strict";
-  const ENDPOINT = "https://script.google.com/macros/s/AKfycbwym7MceOoMB4PMJo62PWxzh_KZiF_8ssd7XLaC50n64pyTW1DM1P43RTUKaBMOFvQ/exec";
+  const ENDPOINT = "activities.json";
   const target = document.getElementById("published-activities");
   if (!target) return;
 
