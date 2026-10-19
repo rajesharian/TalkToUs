@@ -29,6 +29,47 @@
     return new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(date);
   }
 
+  // Scoped gallery CSS; does not change existing timeline photographs.
+  const galleryStyle = document.createElement("style");
+  galleryStyle.textContent = `
+    .talk2us-activity-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      width: 100%;
+      margin: 16px 0 12px;
+    }
+    .talk2us-gallery-frame {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border: 1px solid #e6d7ca;
+      border-radius: 12px;
+      background: #f5e4da;
+    }
+    .talk2us-gallery-frame img {
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      border-radius: 0 !important;
+    }
+    @media (max-width: 800px) {
+      .talk2us-activity-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 520px) {
+      .talk2us-activity-gallery { grid-template-columns: minmax(0, 1fr); }
+    }
+  `;
+  document.head.appendChild(galleryStyle);
+
   async function load() {
     try {
       const response = await fetch(ENDPOINT, { redirect: "follow", cache: "no-store" });
@@ -48,40 +89,42 @@
         if (activity.description) addText(item, "p", "", activity.description);
         // Display public Google Drive photographs using the existing timeline photo style.
         const photoUrls = String(activity.photographs || "").split(/,\s*|\n/).map(safeLink).filter(Boolean);
-        photoUrls.forEach((url, index) => {
-          let imageUrl = url;
-          try {
-            const parsed = new URL(url);
-            if (parsed.hostname === "drive.google.com") {
-              const id = parsed.searchParams.get("id") || (parsed.pathname.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || [])[1];
-              if (id && /^[a-zA-Z0-9_-]+$/.test(id)) {
-                imageUrl = "https://drive.google.com/thumbnail?id=" + encodeURIComponent(id) + "&sz=w1200";
+        if (photoUrls.length) {
+          const gallery = document.createElement("div");
+          gallery.className = "talk2us-activity-gallery";
+          photoUrls.forEach((url, index) => {
+            let imageUrl = url;
+            try {
+              const parsed = new URL(url);
+              if (parsed.hostname === "drive.google.com") {
+                const id = parsed.searchParams.get("id") ||
+                  (parsed.pathname.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || [])[1];
+                if (id && /^[a-zA-Z0-9_-]+$/.test(id)) {
+                  imageUrl = "https://drive.google.com/thumbnail?id=" + encodeURIComponent(id) + "&sz=w1200";
+                }
               }
-            }
-          } catch (_) {}
-          const frame = document.createElement("div");
-          // Use a separate class to avoid legacy .tl-photo fixed-size cropping rules.
-          frame.className = "activity-photo-full";
-          frame.style.cssText = "display:block;width:100%;max-width:500px;height:auto;max-height:none;aspect-ratio:auto;overflow:visible;margin:14px 0 0;padding:0;background:transparent;border:0;";
-          const img = document.createElement("img");
-          img.src = imageUrl;
-          img.alt = "Photograph of " + String(activity.title);
-          img.loading = "lazy";
-          img.referrerPolicy = "no-referrer";
-          // Natural aspect ratio: no crop, no fixed height, no cover scaling.
-          img.style.cssText = "display:block;width:100%;height:auto;max-width:100%;max-height:none;aspect-ratio:auto;object-fit:contain;object-position:center;border-radius:12px;";
-          img.onerror = () => {
-            frame.replaceChildren();
-            const link = document.createElement("a");
-            link.href = url;
-            link.target = "_blank";
-            link.rel = "noopener noreferrer";
-            link.textContent = "View activity photograph" + (photoUrls.length > 1 ? " " + (index + 1) : "");
-            frame.appendChild(link);
-          };
-          frame.appendChild(img);
-          item.appendChild(frame);
-        });
+            } catch (_) {}
+            const frame = document.createElement("div");
+            frame.className = "talk2us-gallery-frame";
+            const img = document.createElement("img");
+            img.src = imageUrl;
+            img.alt = "Photograph " + (index + 1) + " of " + String(activity.title);
+            img.loading = "lazy";
+            img.referrerPolicy = "no-referrer";
+            img.onerror = () => {
+              frame.replaceChildren();
+              const link = document.createElement("a");
+              link.href = url;
+              link.target = "_blank";
+              link.rel = "noopener noreferrer";
+              link.textContent = "View activity photograph " + (index + 1);
+              frame.appendChild(link);
+            };
+            frame.appendChild(img);
+            gallery.appendChild(frame);
+          });
+          item.appendChild(gallery);
+        }
         let video = safeLink(activity.videoUrl);
         if (!video && /^www\./i.test(String(activity.videoUrl || "").trim())) {
           video = safeLink("https://" + String(activity.videoUrl).trim());
