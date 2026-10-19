@@ -1,14 +1,4 @@
 {
   "success": true,
-  "activities": [
-    {
-      "title": "Test Mental Health Workshop",
-      "date": "2026-10-19",
-      "location": "Haldwani",
-      "description": "Testing the Talk2Us activity publishing system.",
-      "category": "Workshop",
-      "photographs": "https://talktous.co.in/assets/activities/mental-health-workshop1.jpg, https://talktous.co.in/assets/activities/mental-health-workshop2.jpg, https://talktous.co.in/assets/activities/mental-health-workshop3.jpg",
-      "videoUrl": "https://www.youtube.com/uouliove"
-    }
-  ]
+  "activities": []
 }
