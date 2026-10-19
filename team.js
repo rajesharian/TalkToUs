@@ -88,9 +88,31 @@
     }
     card.appendChild(body);
     const category = categoryKey(member.category);
-    const section = document.querySelector('[data-team-category="' + category + '"]');
-    const target = document.querySelector('[data-team-grid="' + category + '"]');
-    if (!section || !target) return;
+    let section = document.querySelector('[data-team-category="' + category + '"]');
+    let target = document.querySelector('[data-team-grid="' + category + '"]');
+
+    // Support older about.html versions without category containers.
+    // Add category groups after the existing six-card grid, without altering it.
+    if (!section || !target) {
+      const labels = {
+        counsellors: 'Counselors & Psychologists',
+        volunteers: 'Volunteers',
+        partners: 'Support Partners',
+        other: 'Other Team Members'
+      };
+      section = document.createElement('div');
+      section.dataset.teamCategory = category;
+      section.style.marginTop = '32px';
+      const heading = document.createElement('h3');
+      heading.textContent = labels[category];
+      heading.style.marginBottom = '18px';
+      section.appendChild(heading);
+      target = document.createElement('div');
+      target.className = 'team-grid';
+      target.dataset.teamGrid = category;
+      section.appendChild(target);
+      grid.insertAdjacentElement('afterend', section);
+    }
     target.appendChild(card);
     section.hidden = false;
   }
