@@ -47,26 +47,49 @@
         addText(item, "h3", "", activity.title);
         if (activity.description) addText(item, "p", "", activity.description);
         if (activity.category) addText(item, "p", "", "Category: " + activity.category);
-        // Google Form upload URLs may be private; provide links rather than broken embedded images.
+        // Display public Google Drive photographs using the existing timeline photo style.
         const photoUrls = String(activity.photographs || "").split(/,\s*|\n/).map(safeLink).filter(Boolean);
         photoUrls.forEach((url, index) => {
-          const p = document.createElement("p");
-          const a = document.createElement("a");
-          a.href = url;
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
-          a.textContent = "View activity photograph" + (photoUrls.length > 1 ? " " + (index + 1) : "");
-          p.appendChild(a);
-          item.appendChild(p);
+          let imageUrl = url;
+          try {
+            const parsed = new URL(url);
+            if (parsed.hostname === "drive.google.com") {
+              const id = parsed.searchParams.get("id") || (parsed.pathname.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || [])[1];
+              if (id && /^[a-zA-Z0-9_-]+$/.test(id)) {
+                imageUrl = "https://drive.google.com/thumbnail?id=" + encodeURIComponent(id) + "&sz=w1200";
+              }
+            }
+          } catch (_) {}
+          const frame = document.createElement("div");
+          frame.className = "tl-photo";
+          const img = document.createElement("img");
+          img.src = imageUrl;
+          img.alt = "Photograph of " + String(activity.title);
+          img.loading = "lazy";
+          img.referrerPolicy = "no-referrer";
+          img.onerror = () => {
+            frame.replaceChildren();
+            const link = document.createElement("a");
+            link.href = url;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.textContent = "View activity photograph" + (photoUrls.length > 1 ? " " + (index + 1) : "");
+            frame.appendChild(link);
+          };
+          frame.appendChild(img);
+          item.appendChild(frame);
         });
-        const video = safeLink(activity.videoUrl);
+        let video = safeLink(activity.videoUrl);
+        if (!video && /^www\./i.test(String(activity.videoUrl || "").trim())) {
+          video = safeLink("https://" + String(activity.videoUrl).trim());
+        }
         if (video) {
           const p = document.createElement("p");
           const a = document.createElement("a");
           a.href = video;
           a.target = "_blank";
           a.rel = "noopener noreferrer";
-          a.textContent = "Watch video / read coverage";
+          a.textContent = "Watch video / visit website";
           p.appendChild(a);
           item.appendChild(p);
         }
