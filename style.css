@@ -388,3 +388,11 @@ footer.site-footer{background:var(--cream); border-top:1px solid var(--line); pa
   html{scroll-behavior:auto;}
   *{transition:none !important;}
 }
+
+/* Homepage hero: preserve the intended two-line heading on desktop. */
+@media (min-width: 768px) {
+  .hero h1 .hero-heading-line { display: block; white-space: nowrap; }
+}
+@media (max-width: 767px) {
+  .hero h1 .hero-heading-line { display: block; }
+}
