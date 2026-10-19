@@ -60,29 +60,16 @@
             }
           } catch (_) {}
           const frame = document.createElement("div");
-          frame.className = "tl-photo";
+          // Use a separate class to avoid legacy .tl-photo fixed-size cropping rules.
+          frame.className = "activity-photo-full";
+          frame.style.cssText = "display:block;width:100%;max-width:500px;height:auto;max-height:none;aspect-ratio:auto;overflow:visible;margin:14px 0 0;padding:0;background:transparent;border:0;";
           const img = document.createElement("img");
           img.src = imageUrl;
           img.alt = "Photograph of " + String(activity.title);
           img.loading = "lazy";
           img.referrerPolicy = "no-referrer";
-          // Show the complete photograph at its natural aspect ratio.
-          // Important overrides prevent legacy .tl-photo CSS from cropping it.
-          frame.style.setProperty("height", "auto", "important");
-          frame.style.setProperty("max-height", "none", "important");
-          frame.style.setProperty("aspect-ratio", "auto", "important");
-          frame.style.setProperty("overflow", "visible", "important");
-          frame.style.setProperty("width", "100%", "important");
-          frame.style.setProperty("max-width", "500px", "important");
-          img.style.setProperty("display", "block", "important");
-          img.style.setProperty("width", "100%", "important");
-          img.style.setProperty("max-width", "100%", "important");
-          img.style.setProperty("height", "auto", "important");
-          img.style.setProperty("max-height", "none", "important");
-          img.style.setProperty("aspect-ratio", "auto", "important");
-          img.style.setProperty("object-fit", "contain", "important");
-          img.style.setProperty("object-position", "center", "important");
-          img.style.setProperty("border-radius", "12px", "important");
+          // Natural aspect ratio: no crop, no fixed height, no cover scaling.
+          img.style.cssText = "display:block;width:100%;height:auto;max-width:100%;max-height:none;aspect-ratio:auto;object-fit:contain;object-position:center;border-radius:12px;";
           img.onerror = () => {
             frame.replaceChildren();
             const link = document.createElement("a");
