@@ -1,4 +1,14 @@
 {
   "success": true,
-  "members": []
+  "members": [
+    {
+      "name": "Test Team Member",
+      "designation": "Counsellor",
+      "category": "Counsellors & Psychologists",
+      "qualifications": "MA Psychology",
+      "biography": "Test profile for verifying the Talk2Us team management system.",
+      "photograph": "https://talktous.co.in/assets/team/test-member.jpg",
+      "profileUrl": ""
+    }
+  ]
 }
