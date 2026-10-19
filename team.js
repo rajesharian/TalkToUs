@@ -17,11 +17,22 @@
     } catch { return ''; }
   }
 
+  function categoryKey(value) {
+    const category = normalize(value);
+    if (category.includes('psychologist') || category.includes('counselor') || category.includes('counsellor')) return 'counsellors';
+    if (category.includes('volunteer')) return 'volunteers';
+    if (category.includes('partner')) return 'partners';
+    return 'other';
+  }
+
   function imageUrl(value) {
     const url = safeUrl(value);
     if (!url) return '';
-    // Google Forms uploads generally require access permissions and aren't reliable image URLs.
-    if (/^https?:\/\/(?:drive|docs)\.google\.com\//i.test(url)) return '';
+    // A public Google Drive upload may render as a thumbnail; private files still require permission.
+    if (/^https?:\/\/(?:drive|docs)\.google\.com\//i.test(url)) {
+      const id = new URL(url).searchParams.get('id') || (url.match(/\/d\/([a-zA-Z0-9_-]+)/) || [])[1];
+      return id ? 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w400' : '';
+    }
     return url;
   }
 
@@ -32,7 +43,8 @@
     if (!key || existing.has(key)) return;
     existing.add(key);
 
-    const href = safeUrl(member.profileUrl);
+    // Preserve an explicitly supplied profile URL; otherwise use the shared profile page.
+    const href = safeUrl(member.profileUrl) || 'team-profile.html?name=' + encodeURIComponent(name);
     const card = document.createElement(href ? 'a' : 'div');
     card.className = 'team-card';
     if (href) card.href = href;
@@ -75,7 +87,12 @@
       body.appendChild(view);
     }
     card.appendChild(body);
-    grid.appendChild(card);
+    const category = categoryKey(member.category);
+    const section = document.querySelector('[data-team-category="' + category + '"]');
+    const target = document.querySelector('[data-team-grid="' + category + '"]');
+    if (!section || !target) return;
+    target.appendChild(card);
+    section.hidden = false;
   }
 
   fetch(API_URL, { redirect: 'follow' })
