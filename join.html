@@ -72,59 +72,10 @@
         </div>
       </div>
 
-      <form class="contact-panel" id="join-form">
-        <input type="hidden" name="form_type" value="join_team">
-        <div class="field">
-          <label for="jname">Full name</label>
-          <input type="text" id="jname" name="name" placeholder="Your full name" required>
-        </div>
-        <div class="field">
-          <label for="jemail">Email</label>
-          <input type="email" id="jemail" name="email" placeholder="you@example.com" required>
-        </div>
-        <div class="field">
-          <label for="jphone">Phone number</label>
-          <input type="tel" id="jphone" name="phone" placeholder="+91" required>
-        </div>
-        <div class="field">
-          <label for="jrole">Which role interests you?</label>
-          <select id="jrole" name="role" required>
-            <option value="">Select a role</option>
-            <option>Counsellor</option>
-            <option>Therapist</option>
-            <option>Volunteer</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="jqualification">Highest qualification</label>
-          <select id="jqualification" name="qualification" required>
-            <option value="">Select your highest qualification</option>
-            <option>Ph.D.</option>
-            <option>Masters in Psychology</option>
-            <option>Post Doctoral Fellow</option>
-            <option value="Other">Other (Please specify)</option>
-          </select>
-        </div>
-        <div class="field" id="jqualification-other-wrap" style="display:none;">
-          <label for="jqualification-other">Please specify</label>
-          <input type="text" id="jqualification-other" name="qualification_other" placeholder="Your qualification">
-        </div>
-        <div class="field">
-          <label for="jqual">Relevant experience</label>
-          <textarea id="jqual" name="qualifications" rows="3" placeholder="e.g. certifications, years of experience"></textarea>
-        </div>
-        <div class="field">
-          <label for="jresume">Attach your resume</label>
-          <input type="file" id="jresume" name="resume" accept=".pdf,.doc,.docx">
-          <div style="font-size:12.5px; color:var(--muted-2); margin-top:6px;">PDF or Word document, up to 5MB.</div>
-        </div>
-        <div class="field">
-          <label for="jmessage">Why do you want to join Talk2Us?</label>
-          <textarea id="jmessage" name="message" rows="3" placeholder="Tell us a bit about yourself"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit Application</button>
-      </form>
+      <div class="contact-panel" aria-label="Talk2Us team application form" style="padding:20px;">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSee4AvNtIIUCVxDKxX2Usztb5Mo4YGciOy3dlrjYTqxw2N60g/viewform?embedded=true" title="Talk2Us Join Our Team application" width="100%" height="1150" style="display:block;border:0;max-width:100%;" loading="lazy">Loading application form…</iframe>
+        <p style="font-size:13px;margin:12px 0 0;">Having trouble viewing the form? <a href="https://docs.google.com/forms/d/e/1FAIpQLSee4AvNtIIUCVxDKxX2Usztb5Mo4YGciOy3dlrjYTqxw2N60g/viewform" target="_blank" rel="noopener noreferrer">Open the application form in a new tab</a>.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -156,86 +107,6 @@
 </footer>
 
 <script src="script.js"></script>
-<script>
-  // Handles the Join Our Team form specifically — separate from the
-  // generic .gs-form handler in script.js, since this one needs to
-  // read and base64-encode an attached resume file before sending.
-  document.addEventListener('DOMContentLoaded', () => {
-    const qualSelect = document.getElementById('jqualification');
-    const otherWrap = document.getElementById('jqualification-other-wrap');
-    if (qualSelect && otherWrap) {
-      qualSelect.addEventListener('change', () => {
-        otherWrap.style.display = qualSelect.value === 'Other' ? 'block' : 'none';
-      });
-    }
 
-    const form = document.getElementById('join-form');
-    if (!form) return;
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]');
-      const originalText = btn ? btn.textContent : '';
-      const fileInput = document.getElementById('jresume');
-      const file = fileInput && fileInput.files[0];
-
-      if (file && file.size > 5 * 1024 * 1024) {
-        alert('That resume is over 5MB — please attach a smaller file.');
-        return;
-      }
-
-      if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
-
-      const buildPayload = (base64, filename, mimetype) => {
-        const payload = {};
-        new FormData(form).forEach((value, key) => {
-          if (key === 'resume') return;
-          payload[key] = value;
-        });
-        // Fold "please specify" text into the qualification value
-        if (payload.qualification === 'Other' && payload.qualification_other) {
-          payload.qualification = payload.qualification_other;
-        }
-        if (base64) {
-          payload.resume_base64 = base64;
-          payload.resume_filename = filename;
-          payload.resume_mimetype = mimetype;
-        }
-        return payload;
-      };
-
-      const send = (payload) => {
-        fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
-        })
-          .then(() => {
-            form.innerHTML = '<p style="font-family:\'Plus Jakarta Sans\',sans-serif; font-weight:700; color:#171410; font-size:16px; margin:0;">Thank you for applying! Check your email — a welcome message is on its way.</p>';
-          })
-          .catch(() => {
-            if (btn) { btn.disabled = false; btn.textContent = originalText; }
-            alert('Something went wrong sending your application. Please try again, or email us directly at talk2ushaldwani@gmail.com.');
-          });
-      };
-
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const base64 = reader.result.split(',')[1];
-          send(buildPayload(base64, file.name, file.type));
-        };
-        reader.onerror = () => {
-          if (btn) { btn.disabled = false; btn.textContent = originalText; }
-          alert('Could not read the attached file. Please try again.');
-        };
-        reader.readAsDataURL(file);
-      } else {
-        send(buildPayload());
-      }
-    });
-  });
-</script>
 </body>
 </html>
