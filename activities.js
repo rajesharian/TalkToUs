@@ -46,7 +46,6 @@
         if (label) addText(item, "span", "tl-date", label);
         addText(item, "h3", "", activity.title);
         if (activity.description) addText(item, "p", "", activity.description);
-        if (activity.category) addText(item, "p", "", "Category: " + activity.category);
         // Display public Google Drive photographs using the existing timeline photo style.
         const photoUrls = String(activity.photographs || "").split(/,\s*|\n/).map(safeLink).filter(Boolean);
         photoUrls.forEach((url, index) => {
